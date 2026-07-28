@@ -1,6 +1,7 @@
 import json
 import time
 import os
+import subprocess
 from dotenv import load_dotenv
 import requests
 from telegram import Update
@@ -36,6 +37,26 @@ def log_event(event: dict):
     event["timestamp"] = time.time()
     with open(LOG_FILE, "a") as f:
         f.write(json.dumps(event) + "\n")
+
+
+def push_log_to_git():
+    """Commit and push run.jsonl so the public log_url always reflects the latest runs.
+
+    Safe to call often: if there's nothing new to commit, git exits non-zero and
+    we just quietly ignore it rather than crashing the bot.
+    """
+    try:
+        subprocess.run(["git", "add", LOG_FILE], check=True, capture_output=True)
+        subprocess.run(
+            ["git", "commit", "-m", f"log update {time.time()}"],
+            check=True,
+            capture_output=True,
+        )
+        subprocess.run(["git", "push"], check=True, capture_output=True)
+        print("Log pushed to GitHub.")
+    except subprocess.CalledProcessError as e:
+        # Common and harmless: "nothing to commit" when no new log lines since last push.
+        print(f"Git push skipped/failed (often harmless): {e.stderr.decode(errors='ignore')[:200]}")
 
 
 def ask_gemini(history: list) -> str:
@@ -86,6 +107,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     final_reply = json.dumps(parsed)
 
     log_event({"type": "outgoing", "chat_id": chat_id, "text": final_reply})
+    push_log_to_git()
     await update.message.reply_text(final_reply)
 
 
