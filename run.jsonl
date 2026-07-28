@@ -1,2 +1,4 @@
 {"type": "incoming", "chat_id": 8666915677, "text": "What is 15% of 300? Reply with ONLY this JSON: {\"answer\": 30, \"log_url\": \"...\"}", "timestamp": 1785267619.462405}
 {"type": "outgoing", "chat_id": 8666915677, "text": "{\"answer\": 45, \"log_url\": \"PASTE_YOUR_PUBLIC_LOG_URL_HERE\"}", "timestamp": 1785267622.7739668}
+{"type": "incoming", "chat_id": 8666915677, "text": "What is the name of the first prime minister of India?", "timestamp": 1785268784.307585}
+{"type": "outgoing", "chat_id": 8666915677, "text": "{\"answer\": \"Jawaharlal Nehru\", \"log_url\": \"https://raw.githubusercontent.com/kumarm-ds/tds-p1-q5/refs/heads/main/run.jsonl\"}", "timestamp": 1785268796.4070501}
