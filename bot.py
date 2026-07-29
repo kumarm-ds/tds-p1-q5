@@ -50,7 +50,7 @@ def setup_git_auth():
             subprocess.run(["git", "fetch", "origin", "main"], check=True, capture_output=True)
             # Adopt the real repo's history so future commits build on top of it,
             # rather than starting an unrelated history that can't be pushed cleanly.
-            subprocess.run(["git", "checkout", "-B", "main", "origin/main"], check=True, capture_output=True)
+            subprocess.run(["git", "checkout", "-f", "-B", "main", "origin/main"], check=True, capture_output=True)
         else:
             subprocess.run(["git", "remote", "set-url", "origin", remote_url], check=True)
 
