@@ -44,9 +44,6 @@ def setup_git_auth():
         owner, repo = parts[0], parts[1]
         remote_url = f"https://x-access-token:{GITHUB_TOKEN}@github.com/{owner}/{repo}.git"
 
-        subprocess.run(["git", "config", "user.email", "bot@example.com"], check=True)
-        subprocess.run(["git", "config", "user.name", "Data Analyst Bot"], check=True)
-
         if not os.path.isdir(".git"):
             subprocess.run(["git", "init"], check=True, capture_output=True)
             subprocess.run(["git", "remote", "add", "origin", remote_url], check=True, capture_output=True)
@@ -56,6 +53,12 @@ def setup_git_auth():
             subprocess.run(["git", "checkout", "-B", "main", "origin/main"], check=True, capture_output=True)
         else:
             subprocess.run(["git", "remote", "set-url", "origin", remote_url], check=True)
+
+        # These are LOCAL config (no --global), so they must run after the repo
+        # above already exists — running them first is what caused "not in a
+        # git directory" errors.
+        subprocess.run(["git", "config", "user.email", "bot@example.com"], check=True)
+        subprocess.run(["git", "config", "user.name", "Data Analyst Bot"], check=True)
 
         print("Git auth configured for auto-push.")
     except Exception as e:
