@@ -24,9 +24,13 @@ GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")  # only needed for auto-push on a 
 
 
 def setup_git_auth():
-    """Configure git identity + an authenticated remote, so push works with no
+    """Configure a working git repo + authenticated remote, so push works with no
     interactive login (needed on a fresh host like Railway, unlike your own
-    laptop where git already has cached credentials).
+    laptop where git already has cached credentials AND a real .git folder).
+
+    Railway's build copies your source files but not .git itself, so /app
+    isn't a git repository at all on first boot — this initializes one and
+    syncs it with your real GitHub repo's history before any commits happen.
 
     Safe to call even if GITHUB_TOKEN isn't set (e.g. running locally) — it
     just skips silently and your normal local git setup is used instead.
@@ -42,7 +46,17 @@ def setup_git_auth():
 
         subprocess.run(["git", "config", "user.email", "bot@example.com"], check=True)
         subprocess.run(["git", "config", "user.name", "Data Analyst Bot"], check=True)
-        subprocess.run(["git", "remote", "set-url", "origin", remote_url], check=True)
+
+        if not os.path.isdir(".git"):
+            subprocess.run(["git", "init"], check=True, capture_output=True)
+            subprocess.run(["git", "remote", "add", "origin", remote_url], check=True, capture_output=True)
+            subprocess.run(["git", "fetch", "origin", "main"], check=True, capture_output=True)
+            # Adopt the real repo's history so future commits build on top of it,
+            # rather than starting an unrelated history that can't be pushed cleanly.
+            subprocess.run(["git", "checkout", "-B", "main", "origin/main"], check=True, capture_output=True)
+        else:
+            subprocess.run(["git", "remote", "set-url", "origin", remote_url], check=True)
+
         print("Git auth configured for auto-push.")
     except Exception as e:
         print(f"Could not configure git auth (auto-push will fail silently): {e}")
