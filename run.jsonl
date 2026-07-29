@@ -27,3 +27,8 @@
 {"type": "data_fetched", "chat_id": 5850015579, "url": "https://raw.githubusercontent.com/kumarm-ds/tds-p1-q5/refs/heads/main/sample_data.csv", "timestamp": 1785297510.318431}
 {"type": "computed", "chat_id": 5850015579, "expression": "df[df['year'] == 2021].loc[df[df['year'] == 2021]['literacy_rate'].idxmax()]['state']", "result": "Kerala", "timestamp": 1785297512.7898026}
 {"type": "outgoing", "chat_id": 5850015579, "text": "{\"state_with_highest_literacy_rate_2021\": \"Kerala\", \"log_url\": \"https://raw.githubusercontent.com/kumarm-ds/tds-p1-q5/refs/heads/main/run.jsonl\"}", "timestamp": 1785297514.8285902}
+{"type": "incoming", "chat_id": 5850015579, "text": "Using this CSV https://raw.githubusercontent.com/kumarm-ds/tds-p1-q5/refs/heads/main/sample_data.csv, what is the average population_millions across all years for Bihar?", "timestamp": 1785297576.081764}
+{"type": "plan", "chat_id": 5850015579, "plan": {"need_data": true, "url": "https://raw.githubusercontent.com/kumarm-ds/tds-p1-q5/refs/heads/main/sample_data.csv"}, "timestamp": 1785297578.677174}
+{"type": "data_fetched", "chat_id": 5850015579, "url": "https://raw.githubusercontent.com/kumarm-ds/tds-p1-q5/refs/heads/main/sample_data.csv", "timestamp": 1785297579.398081}
+{"type": "computed", "chat_id": 5850015579, "expression": "df[df['state'] == 'Bihar']['population_millions'].mean()", "result": "122.19999999999999", "timestamp": 1785297581.6646879}
+{"type": "outgoing", "chat_id": 5850015579, "text": "{\"average_population_bihar\": 122.19999999999999, \"log_url\": \"https://raw.githubusercontent.com/kumarm-ds/tds-p1-q5/refs/heads/main/run.jsonl\"}", "timestamp": 1785297583.7662964}
