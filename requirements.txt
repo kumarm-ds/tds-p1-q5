@@ -1,3 +1,5 @@
 python-telegram-bot
 requests
 python-dotenv
+pandas
+openpyxl
