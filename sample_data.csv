@@ -1,0 +1,101 @@
+state,year,literacy_rate,population_millions
+Assam,2018,72.19,32.5
+Assam,2019,73.1,32.9
+Assam,2020,73.8,33.3
+Assam,2021,74.5,33.7
+Kerala,2018,96.2,34.0
+Kerala,2019,96.4,34.2
+Kerala,2020,96.5,34.4
+Kerala,2021,96.7,34.6
+Bihar,2018,61.8,119.5
+Bihar,2019,62.5,121.3
+Bihar,2020,63.1,123.1
+Bihar,2021,63.8,124.9
+Maharashtra,2018,82.3,117.0
+Maharashtra,2019,82.9,118.5
+Maharashtra,2020,83.4,120.0
+Maharashtra,2021,83.9,121.5
+Tamil Nadu,2018,80.1,73.6
+Tamil Nadu,2019,80.6,74.1
+Tamil Nadu,2020,81.1,74.6
+Tamil Nadu,2021,81.6,75.1
+Uttar Pradesh,2018,67.7,224.0
+Uttar Pradesh,2019,68.3,227.5
+Uttar Pradesh,2020,68.9,231.0
+Uttar Pradesh,2021,69.5,234.5
+West Bengal,2018,76.3,94.5
+West Bengal,2019,76.9,95.5
+West Bengal,2020,77.4,96.5
+West Bengal,2021,77.9,97.5
+Karnataka,2018,75.4,64.2
+Karnataka,2019,76.0,65.0
+Karnataka,2020,76.6,65.8
+Karnataka,2021,77.2,66.6
+Gujarat,2018,78.0,64.9
+Gujarat,2019,78.6,65.8
+Gujarat,2020,79.1,66.7
+Gujarat,2021,79.6,67.6
+Rajasthan,2018,66.1,79.5
+Rajasthan,2019,66.8,80.8
+Rajasthan,2020,67.4,82.1
+Rajasthan,2021,68.0,83.4
+Punjab,2018,75.8,29.9
+Punjab,2019,76.3,30.2
+Punjab,2020,76.8,30.5
+Punjab,2021,77.3,30.8
+Haryana,2018,75.6,28.9
+Haryana,2019,76.2,29.4
+Haryana,2020,76.7,29.9
+Haryana,2021,77.2,30.4
+Madhya Pradesh,2018,69.3,84.6
+Madhya Pradesh,2019,69.9,85.9
+Madhya Pradesh,2020,70.5,87.2
+Madhya Pradesh,2021,71.1,88.5
+Odisha,2018,72.9,45.4
+Odisha,2019,73.5,45.9
+Odisha,2020,74.0,46.4
+Odisha,2021,74.5,46.9
+Telangana,2018,72.8,38.5
+Telangana,2019,73.4,39.1
+Telangana,2020,73.9,39.7
+Telangana,2021,74.4,40.3
+Andhra Pradesh,2018,67.4,53.9
+Andhra Pradesh,2019,68.0,54.5
+Andhra Pradesh,2020,68.6,55.1
+Andhra Pradesh,2021,69.2,55.7
+Chhattisgarh,2018,71.0,29.4
+Chhattisgarh,2019,71.6,29.8
+Chhattisgarh,2020,72.1,30.2
+Chhattisgarh,2021,72.6,30.6
+Jharkhand,2018,66.4,38.6
+Jharkhand,2019,67.0,39.2
+Jharkhand,2020,67.6,39.8
+Jharkhand,2021,68.2,40.4
+Uttarakhand,2018,79.6,11.4
+Uttarakhand,2019,80.1,11.6
+Uttarakhand,2020,80.6,11.8
+Uttarakhand,2021,81.1,12.0
+Himachal Pradesh,2018,83.8,7.3
+Himachal Pradesh,2019,84.2,7.4
+Himachal Pradesh,2020,84.6,7.5
+Himachal Pradesh,2021,85.0,7.6
+Goa,2018,88.7,1.5
+Goa,2019,89.0,1.55
+Goa,2020,89.3,1.6
+Goa,2021,89.6,1.65
+Tripura,2018,87.2,4.1
+Tripura,2019,87.6,4.15
+Tripura,2020,88.0,4.2
+Tripura,2021,88.4,4.25
+Manipur,2018,79.8,3.1
+Manipur,2019,80.2,3.15
+Manipur,2020,80.6,3.2
+Manipur,2021,81.0,3.25
+Meghalaya,2018,75.5,3.4
+Meghalaya,2019,75.9,3.45
+Meghalaya,2020,76.3,3.5
+Meghalaya,2021,76.7,3.55
+Nagaland,2018,80.1,2.1
+Nagaland,2019,80.4,2.12
+Nagaland,2020,80.7,2.14
+Nagaland,2021,81.0,2.16
