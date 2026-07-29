@@ -4,3 +4,7 @@
 {"type": "outgoing", "chat_id": 8666915677, "text": "{\"answer\": \"Jawaharlal Nehru\", \"log_url\": \"https://raw.githubusercontent.com/kumarm-ds/tds-p1-q5/refs/heads/main/run.jsonl\"}", "timestamp": 1785268796.4070501}
 {"type": "incoming", "chat_id": 5850015579, "text": "what is 20% of 1000?", "timestamp": 1785294587.9107761}
 {"type": "outgoing", "chat_id": 5850015579, "text": "{\"result\": 200, \"log_url\": \"https://raw.githubusercontent.com/kumarm-ds/tds-p1-q5/refs/heads/main/run.jsonl\"}", "timestamp": 1785294594.436478}
+{"type": "incoming", "chat_id": 5850015579, "text": "Using this CSV https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv, what is the average total_bill? Reply with ONLY this JSON: {\"answer\": <number>, \"log_url\": \"...\"}", "timestamp": 1785296261.1209953}
+{"type": "plan", "chat_id": 5850015579, "plan": {"need_data": true, "url": "https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv"}, "timestamp": 1785296266.0308013}
+{"type": "data_fetched", "chat_id": 5850015579, "url": "https://raw.githubusercontent.com/mwaskom/seaborn-data/master/tips.csv", "timestamp": 1785296266.957216}
+{"type": "outgoing", "chat_id": 5850015579, "text": "{\"answer\": 20.441, \"log_url\": \"https://raw.githubusercontent.com/kumarm-ds/tds-p1-q5/refs/heads/main/run.jsonl\"}", "timestamp": 1785296281.1895838}
