@@ -61,6 +61,9 @@ def setup_git_auth():
         subprocess.run(["git", "config", "user.name", "Data Analyst Bot"], check=True)
 
         print("Git auth configured for auto-push.")
+    except subprocess.CalledProcessError as e:
+        stderr = e.stderr.decode(errors="ignore") if e.stderr else "(no stderr captured)"
+        print(f"Could not configure git auth (auto-push will fail silently): {stderr}")
     except Exception as e:
         print(f"Could not configure git auth (auto-push will fail silently): {e}")
 
