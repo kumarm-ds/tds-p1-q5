@@ -20,6 +20,32 @@ LOG_URL = os.environ.get("LOG_URL", "PASTE_YOUR_PUBLIC_LOG_URL_HERE")
 
 GEMINI_URL = "https://aipipe.org/geminiv1beta/models/gemini-2.5-flash:generateContent"
 LOG_FILE = "run.jsonl"
+GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")  # only needed for auto-push on a host like Railway
+
+
+def setup_git_auth():
+    """Configure git identity + an authenticated remote, so push works with no
+    interactive login (needed on a fresh host like Railway, unlike your own
+    laptop where git already has cached credentials).
+
+    Safe to call even if GITHUB_TOKEN isn't set (e.g. running locally) — it
+    just skips silently and your normal local git setup is used instead.
+    """
+    if not GITHUB_TOKEN:
+        return
+    try:
+        # Parse "owner/repo" out of LOG_URL, e.g.
+        # https://raw.githubusercontent.com/kumarm-ds/tds-p1-q5/refs/heads/main/run.jsonl
+        parts = LOG_URL.split("raw.githubusercontent.com/")[1].split("/")
+        owner, repo = parts[0], parts[1]
+        remote_url = f"https://x-access-token:{GITHUB_TOKEN}@github.com/{owner}/{repo}.git"
+
+        subprocess.run(["git", "config", "user.email", "bot@example.com"], check=True)
+        subprocess.run(["git", "config", "user.name", "Data Analyst Bot"], check=True)
+        subprocess.run(["git", "remote", "set-url", "origin", remote_url], check=True)
+        print("Git auth configured for auto-push.")
+    except Exception as e:
+        print(f"Could not configure git auth (auto-push will fail silently): {e}")
 
 # Keeps the last few messages per chat, so multi-turn questions work —
 # "answer the LAST message" still needs the earlier ones for context.
@@ -57,8 +83,9 @@ def log_event(event: dict):
 def push_log_to_git():
     """Commit and push run.jsonl so the public log_url always reflects the latest runs.
 
-    Safe to call often: if there's nothing new to commit, git exits non-zero and
-    we just quietly ignore it rather than crashing the bot.
+    Safe to call often, and safe to fail: if git isn't installed, there's nothing
+    new to commit, or the push fails for any reason, we just log it and move on
+    rather than ever crashing the bot or blocking a reply.
     """
     try:
         subprocess.run(["git", "add", LOG_FILE], check=True, capture_output=True)
@@ -69,9 +96,10 @@ def push_log_to_git():
         )
         subprocess.run(["git", "push"], check=True, capture_output=True)
         print("Log pushed to GitHub.")
-    except subprocess.CalledProcessError as e:
-        # Common and harmless: "nothing to commit" when no new log lines since last push.
-        print(f"Git push skipped/failed (often harmless): {e.stderr.decode(errors='ignore')[:200]}")
+    except Exception as e:
+        # Covers: nothing to commit, git not installed (FileNotFoundError), push
+        # auth failure, network issues, etc. — all harmless to the bot's reply.
+        print(f"Git push skipped/failed (often harmless): {e}")
 
 
 def call_gemini(system_prompt: str, contents: list) -> str:
@@ -236,11 +264,12 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     final_reply = json.dumps(parsed)
 
     log_event({"type": "outgoing", "chat_id": chat_id, "text": final_reply})
-    push_log_to_git()
     await update.message.reply_text(final_reply)
+    push_log_to_git()
 
 
 def main():
+    setup_git_auth()
     app = ApplicationBuilder().token(TELEGRAM_BOT_TOKEN).build()
     app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message))
     print("Bot is running... press Ctrl+C to stop.")
